@@ -3,11 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "heroku-prebuild": "cd frontend && npm install",
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "start": "node server.js"
+    "heroku-prebuild": "cd frontend && npm install && npm run build && npm run serve"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.3.0",
@@ -32,6 +28,6 @@
     "sass-loader": "^8.0.2"
   },
   "engines": {
-    "node": "16.14.0"
+    "node": "16.4.0"
   }
 }

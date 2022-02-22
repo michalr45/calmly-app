@@ -14,6 +14,7 @@ import os
 import django_heroku
 from pathlib import Path
 from dotenv import load_dotenv
+import django_heroku
 
 load_dotenv()
 
@@ -170,3 +171,5 @@ REST_FRAMEWORK = {
 X_FRAME_OPTIONS = 'ALLOWALL'
 
 XS_SHARING_ALLOWED_METHODS = ['POST', 'GET', 'OPTIONS', 'PUT', 'DELETE']
+
+django_heroku.settings(locals())

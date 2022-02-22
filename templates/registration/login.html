@@ -1,0 +1,40 @@
+{% extends "auth_layout.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+{% block content %}
+<div class="container">
+        <div class="title">
+        <h2>LOGIN</h2>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-item">
+            <p class="label">{{ form.username.label_tag }}</p>
+            <p class="text-input">{{ form.username }}</p>
+        </div>
+        <div class="form-item">
+            <p class="label">{{ form.password.label_tag }}</p>
+            <p class="text-input">{{ form.password }}</p>
+        </div>
+          {% if form.errors %}
+            <div class="form-item">
+                {% for error in form.non_field_errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="submit-div">
+            <input type="submit" value="login" class="submit-input">
+        </div>
+    </form>
+    <p>or <a  href="/accounts/register/" class="link">register</a></p>
+</div>
+{% endblock %}
+</body>
+</html>

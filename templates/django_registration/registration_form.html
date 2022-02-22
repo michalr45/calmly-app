@@ -1,0 +1,61 @@
+{% extends "auth_layout.html" %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+{% block content %}
+<div class="container register">
+    <div class="title">
+        <h2>REGISTER</h2>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-item">
+            <p class="label">{{ form.username.label_tag }}</p>
+            <p class="text-input">{{ form.username }}</p>
+            {% for error in form.username.errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+        <div class="form-item">
+            <p class="label">{{ form.email.label_tag }}</p>
+            <p class="text-input">{{ form.email }}</p>
+            {% for error in form.email.errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+        <div class="form-item">
+            <p class="label">{{ form.password1.label_tag }}</p>
+            <p class="text-input">{{ form.password1 }}</p>
+            {% for error in form.password2.errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+        <div class="form-item">
+            <p class="label">{{ form.password2.label_tag }}</p>
+            <p class="text-input">{{ form.password2 }}</p>
+            {% for error in form.password2.errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+        {% if form.errors %}
+            <div class="form-item">
+                {% for error in form.non_field_errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="submit-div">
+            <input type="submit" value="create account" class="submit-input">
+        </div>
+    </form>
+    <p>or <a  href="/accounts/login/" class="link">login</a></p>
+</div>
+{% endblock %}
+</body>
+</html>

@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "heroku-prebuild": "cd frontend && npm install && npm run build"
+    "heroku-prebuild": "cd frontend && npm install"
   },
    "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.3.0",

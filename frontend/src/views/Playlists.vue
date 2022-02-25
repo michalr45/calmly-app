@@ -2,6 +2,7 @@
   <div class="container">
     <div v-for="playlist in playlists" :key="playlist.id" class="playlist-item">
         <button @click="playPlaylist(playlist.id); changeButtonColor($event.target)" class="playlist-btn">{{ playlist.name }}</button>
+        <button @click="deletePlaylist(playlist.id)" class="delete-button">delete</button>
     </div>
   </div>
   <div class="container">
@@ -26,7 +27,7 @@ export default {
   data() {
     return {
       playlists: [],
-      playlistItems: []
+      playlistItems: [],
     }
   },
   methods: {
@@ -55,11 +56,14 @@ export default {
       }
     },
     playAudio(element) {
-      let audio = element.target.nextSibling
+      let audio = element.target.nextSibling;
+      let elementImage = element.target.src.split('.png')[0]
       if (audio.paused) {
         audio.play();
+        element.target.src = elementImage + '-white.png';
       } else {
         audio.pause();
+        element.target.src = element.target.src.split('-white.png')[0] + '.png';
       }
     },
     setVolume(element, value) {
@@ -83,10 +87,24 @@ export default {
     },
     changeButtonColor(button) {
       const btns = document.querySelectorAll('.playlist-btn');
+      const deleteBtns = document.querySelectorAll('.delete-button');
       for (let btn of btns){
         btn.classList.remove('active');
       }
+      for (let deleteBtn of deleteBtns){
+        deleteBtn.classList.remove('active');
+      }
       button.classList.toggle('active');
+      button.nextSibling.classList.toggle('active');
+    },
+    async deletePlaylist(id) {
+      const endpoint = `/api/playlists/playlists/${id}/`;
+      try {
+        await axios.delete(endpoint);
+        location.reload();
+      } catch (error) {
+        console.log(error);
+      }
     }
   },
   created() {
@@ -99,9 +117,13 @@ export default {
 
 .playlist-item{
   padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.playlist-item button{
+.playlist-item .playlist-btn{
   width: auto;
   height: 30px;
   background: transparent;
@@ -113,13 +135,29 @@ export default {
   padding-right: 30px;
   cursor: pointer;
   transition: 0.4s all;
+  margin-bottom: 10px;
 }
 
-.playlist-item button:hover, button.active{
+.playlist-item .playlist-btn:hover, .playlist-btn.active{
   background-color: powderblue;
   color: black;
 }
 
+.delete-button{
+  width: auto;
+  height: 30px;
+  background-color: darkred;
+  color: white;
+  border: 1px solid black;
+  border-radius: 6px;
+  font-weight: bold;
 
+  cursor: pointer;
+  display: none;
+}
+
+.delete-button.active{
+  display: block;
+}
 
 </style>

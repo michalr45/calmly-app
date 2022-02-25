@@ -73,10 +73,13 @@ export default {
   methods: {
     playAudio(element) {
       let audio = element.target.nextSibling;
+      let elementImage = element.target.src.split('.png')[0]
       if (audio.paused) {
         audio.play();
+        element.target.src = elementImage + '-white.png';
       } else {
         audio.pause();
+        element.target.src = element.target.src.split('-white.png')[0] + '.png';
       }
     },
     setVolume(element, value) {

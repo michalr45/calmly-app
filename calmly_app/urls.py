@@ -18,13 +18,15 @@ from django.urls import path, include, re_path
 from django_registration.backends.one_step.views import RegistrationView
 from users.forms import CustomUserForm
 from core.views import IndexTemplateView
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('accounts/register/', RegistrationView.as_view(form_class=CustomUserForm, success_url='/'),
          name='django_registration_register'),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
+    path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('api-auth/', include('rest_framework.urls')),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),

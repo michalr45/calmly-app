@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["not-found"],{9703:function(n,o,t){"use strict";t.r(o);var e=t("7a23"),c={class:"container"},u=Object(e["f"])("h1",null,"404 - Not Found",-1),a=[u];function d(n,o,t,u,d,r){return Object(e["q"])(),Object(e["e"])("div",c,a)}var r={name:"NotFound"},s=t("6b0d"),i=t.n(s);const b=i()(r,[["render",d]]);o["default"]=b}}]);
-//# sourceMappingURL=not-found.c229f0f4.js.map
